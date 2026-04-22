@@ -1,0 +1,54 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:vm="using:MusicLibrary.ViewModels"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+        x:Class="MusicLibrary.Views.MainWindow"
+        x:DataType="vm:MainWindowViewModel"
+        Icon="/Assets/avalonia-logo.ico"
+        Title="MusicLibrary"
+        Background="Black">
+
+    <Design.DataContext>
+        <!-- This only sets the DataContext for the previewer in an IDE,
+             to set the actual DataContext for runtime, set the DataContext property in code (look at App.axaml.cs) -->
+        <vm:MainWindowViewModel/>
+    </Design.DataContext>
+    <StackPanel>
+        <Border BorderBrush="Brown" BorderThickness="0,0,0,10" 
+                Margin="150,15" Padding="0,5,0,5">
+            <TextBlock TextAlignment="Center"
+                       FontSize="50"
+                       Foreground="white">
+                Music Library
+            </TextBlock>
+        </Border>
+        <Grid
+            HorizontalAlignment="Right"
+            ColumnDefinitions="Auto,Auto"
+            RowDefinitions="Auto,Auto">
+            <Button Content="Edit"
+                Grid.Row="0" Grid.Column="0" Margin="15" 
+                    Background="Brown" Foreground="White">
+                <Button.Styles>
+                    <Style Selector="Button:pointerover /template/ ContentPresenter">
+                        <Setter Property="Background" Value="#631919"></Setter>
+                    </Style>
+                </Button.Styles>
+            </Button>
+            <Button Content="New"
+                Grid.Row="0" Grid.Column="1" Margin="0,0,150,0" 
+                    Background="Brown" Foreground="White">
+                <Button.Styles>
+                    <Style Selector="Button:pointerover /template/ ContentPresenter">
+                        <Setter Property="Background" Value="#631919"></Setter>
+                    </Style>
+                </Button.Styles>
+            </Button>
+        </Grid>
+        <Grid>
+            
+        </Grid>
+    </StackPanel>
+</Window>
