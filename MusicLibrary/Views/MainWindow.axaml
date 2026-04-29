@@ -29,6 +29,8 @@
             ColumnDefinitions="Auto,Auto"
             RowDefinitions="Auto,Auto">
             <Button Content="Edit"
+                    Name="EditButton"
+                    Click="editSongButton_OnClick"
                 Grid.Row="0" Grid.Column="0" Margin="15" 
                     Background="Brown" Foreground="White">
                 <Button.Styles>
@@ -38,6 +40,8 @@
                 </Button.Styles>
             </Button>
             <Button Content="New"
+                    Name="NewButton"
+                    Click="AddSongButton_OnClick"
                 Grid.Row="0" Grid.Column="1" Margin="0,0,150,0" 
                     Background="Brown" Foreground="White">
                 <Button.Styles>
@@ -46,8 +50,36 @@
                     </Style>
                 </Button.Styles>
             </Button>
+            <Button Content="Save"
+                    Name="SaveButton"
+                    IsVisible="False"
+                    Click="saveButton_OnClick"
+                    Grid.Row="0" Grid.Column="1" Margin="0,0,150,0" 
+                    Background="Brown" Foreground="White">
+                <Button.Styles>
+                    <Style Selector="Button:pointerover /template/ ContentPresenter">
+                        <Setter Property="Background" Value="#631919"></Setter>
+                    </Style>
+                </Button.Styles>
+            </Button>
         </Grid>
-        <Grid>
+        <Grid ShowGridLines="True" Margin="5"
+              ColumnDefinitions="Auto, Auto"
+              RowDefinitions="Auto, Auto">
+            <Canvas Grid.Row="0" Grid.Column="0"
+                    Margin="5" 
+                    Background="black"
+                    Height="150"
+                    Width="150">
+                <RadioButton GroupName="RadSongs" Background="Red"></RadioButton>
+                <Image Height="75" Width="75" 
+                       Source="../Assets/37cents.png"
+                       Canvas.Bottom="50"/>
+                <TextBlock Canvas.Bottom="5" Canvas.Right="55"
+                           Foreground="White">
+                    Test
+                </TextBlock>
+            </Canvas>
             
         </Grid>
     </StackPanel>
