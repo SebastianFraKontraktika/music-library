@@ -3,7 +3,7 @@
         xmlns:vm="using:MusicLibrary.ViewModels"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+        mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="700"
         x:Class="MusicLibrary.Views.MainWindow"
         x:DataType="vm:MainWindowViewModel"
         Icon="/Assets/avalonia-logo.ico"
@@ -62,11 +62,31 @@
                     </Style>
                 </Button.Styles>
             </Button>
+            <Button Content="Delete"
+                    Name="DeleteButton"
+                    IsVisible="False"
+                    Click="deleteButton_OnClick"
+                    Grid.Row="0" Grid.Column="0" Margin="15" 
+                    Background="Brown" Foreground="White">
+                <Button.Styles>
+                    <Style Selector="Button:pointerover /template/ ContentPresenter">
+                        <Setter Property="Background" Value="#631919"></Setter>
+                    </Style>
+                </Button.Styles>
+            </Button>
         </Grid>
-        <Grid ShowGridLines="True" Margin="5"
-              ColumnDefinitions="Auto, Auto"
-              RowDefinitions="Auto, Auto">
-            <Canvas Grid.Row="0" Grid.Column="0"
+        <Grid ShowGridLines="True"
+              Margin="100,5"
+              ColumnDefinitions="Auto, Auto, Auto"
+              RowDefinitions="Auto, Auto"
+              Name="LibraryGrid">
+            <StackPanel Grid.Row="0" Grid.Column="0"
+                        Height="150"
+                        Width="100"
+                        Background="Gray">
+                
+            </StackPanel>
+            <Canvas Grid.Row="0" Grid.Column="1"
                     Margin="5" 
                     Background="black"
                     Height="150"
@@ -80,7 +100,6 @@
                     Test
                 </TextBlock>
             </Canvas>
-            
         </Grid>
     </StackPanel>
 </Window>
