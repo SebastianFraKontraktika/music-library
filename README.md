@@ -61,4 +61,6 @@ if you have any trouble, then you can open an issue, or you can contact me at (m
 
 ## License
 
-[GPL-3.0](LICENSE)
+Copyright (C) 2026 SebastianFraKontraktika
+
+This project is licensed under the [GNU General Public License v3.0](LICENSE).
