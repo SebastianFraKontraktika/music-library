@@ -80,26 +80,34 @@
               ColumnDefinitions="Auto, Auto, Auto"
               RowDefinitions="Auto, Auto"
               Name="LibraryGrid">
-            <StackPanel Grid.Row="0" Grid.Column="0"
-                        Height="150"
-                        Width="100"
-                        Background="Gray">
-                
-            </StackPanel>
-            <Canvas Grid.Row="0" Grid.Column="1"
-                    Margin="5" 
-                    Background="black"
-                    Height="150"
-                    Width="150">
-                <RadioButton GroupName="RadSongs" Background="Red"></RadioButton>
-                <Image Height="75" Width="75" 
-                       Source="../Assets/37cents.png"
-                       Canvas.Bottom="50"/>
-                <TextBlock Canvas.Bottom="5" Canvas.Right="55"
-                           Foreground="White">
-                    Test
-                </TextBlock>
-            </Canvas>
+            <!-- <Canvas Grid.Row="0" Grid.Column="0" -->
+            <!--         Margin="5"  -->
+            <!--         Background="black" -->
+            <!--         Height="150" -->
+            <!--         Width="150"> -->
+            <!--     <RadioButton GroupName="RadSongs" Background="Red"></RadioButton> -->
+            <!--     <Image Height="75" Width="75"  -->
+            <!--            Source="../Assets/37cents.png" -->
+            <!--            Canvas.Bottom="50"/> -->
+            <!--     <TextBox Canvas.Bottom="20" -->
+            <!--              Canvas.Right="35"> -->
+            <!--         testWrite -->
+            <!--     </TextBox> -->
+            <!--     <Button Canvas.Bottom="20" -->
+            <!--             IsVisible="False" -->
+            <!--             Name="ButtonTest" -->
+            <!--             Canvas.Right="2" -->
+            <!--             Width="30" -->
+            <!--         Background="White" -->
+            <!--             IsDefault="True" -->
+            <!--             Click="genreButton_OnClick"> -->
+            <!--         testButton -->
+            <!--     </Button> -->
+            <!--     <TextBlock Canvas.Bottom="5" Canvas.Right="55" -->
+            <!--                Foreground="White"> -->
+            <!--         Test -->
+            <!--     </TextBlock> -->
+            <!-- </Canvas> -->
         </Grid>
     </StackPanel>
 </Window>

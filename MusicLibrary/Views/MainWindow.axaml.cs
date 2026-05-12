@@ -1,16 +1,19 @@
 using System;
 using Avalonia.Controls;
 using Avalonia.Interactivity;
-using Avalonia.Collections;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using Avalonia.Media;
+using Avalonia.Media.Imaging;
+using Avalonia.Platform;
 using Avalonia.VisualTree;
 
 namespace MusicLibrary.Views;
 
 public partial class MainWindow : Window
 {
+    private readonly List<Button> _genreButtons = new();
     public MainWindow()
     {
         InitializeComponent();
@@ -43,13 +46,33 @@ public partial class MainWindow : Window
             Height = 75,
             Width = 75
         };
+        var bitmap = new Bitmap(AssetLoader.Open(new Uri("avares://MusicLibrary/Assets/37cents.png")));
+        image.Source = bitmap;
+        var button = new Button
+        {
+            Background = Brushes.White,
+            Content = "Genre",
+            IsVisible = false
+        };
+        button.Click += genreButton_OnClick;
+
+        var genreButton = new Button
+        {
+            Content = "Genre",
+            Background =  Brushes.White,
+            IsVisible = false
+        };
+        genreButton.Click += genreButton_OnClick;
         
         int gridCount = LibraryGrid.ColumnDefinitions.Count;
         LibraryGrid.ColumnDefinitions.Add(new ColumnDefinition(GridLength.Auto));
         canvas[Grid.ColumnProperty] = gridCount;
+        LibraryGrid.Children.Add(canvas);
         canvas.Children.Add(radiobutton);
         canvas.Children.Add(textblock);
-        LibraryGrid.Children.Add(canvas);
+        canvas.Children.Add(genreButton);
+        canvas.Children.Add(image);
+        _genreButtons.Add(genreButton);
     }
     
     private void editSongButton_OnClick(object? sender, RoutedEventArgs e)
@@ -58,6 +81,11 @@ public partial class MainWindow : Window
         DeleteButton.IsVisible = true;
         NewButton.IsVisible = false;
         EditButton.IsVisible = false;
+
+        foreach (var button  in _genreButtons)
+        {
+            button.IsVisible = true;
+        }
     }
 
     private void saveButton_OnClick(object? sender, RoutedEventArgs e)
@@ -83,5 +111,10 @@ public partial class MainWindow : Window
         {
             LibraryGrid.Children.Remove(canvas);
         }
+    }
+
+    private void genreButton_OnClick(object? sender, RoutedEventArgs e)
+    {
+        Debug.WriteLine("Enter was pressed!");
     }
 }

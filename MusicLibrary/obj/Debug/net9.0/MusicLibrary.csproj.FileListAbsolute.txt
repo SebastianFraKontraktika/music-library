@@ -88,3 +88,4 @@
 /Users/sebastianmalin/repositories/vg2/Prosjekt/avaloniaProsjekt/MusicLibraryProject/MusicLibrary/obj/Debug/net9.0/MusicLibrary.pdb
 /Users/sebastianmalin/repositories/vg2/Prosjekt/avaloniaProsjekt/MusicLibraryProject/MusicLibrary/obj/Debug/net9.0/MusicLibrary.genruntimeconfig.cache
 /Users/sebastianmalin/repositories/vg2/Prosjekt/avaloniaProsjekt/MusicLibraryProject/MusicLibrary/obj/Debug/net9.0/ref/MusicLibrary.dll
+/Users/sebastianmalin/repositories/vg2/Prosjekt/avaloniaProsjekt/MusicLibraryProject/MusicLibrary/obj/Debug/net9.0/MusicLibrary.sourcelink.json
