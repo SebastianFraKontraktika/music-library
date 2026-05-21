@@ -3,12 +3,25 @@
         xmlns:vm="using:MusicLibrary.ViewModels"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="700"
+        mc:Ignorable="d" d:DesignWidth="1000" d:DesignHeight="900"
         x:Class="MusicLibrary.Views.MainWindow"
         x:DataType="vm:MainWindowViewModel"
         Icon="/Assets/avalonia-logo.ico"
         Title="MusicLibrary"
-        Background="Black">
+        Background="Black"
+        Width="1400"
+        Height="700">
+    <Window.Styles>
+        <Style Selector="RadioButton">
+            <Setter Property="Background" Value="Red"/>
+            <Setter Property="Foreground" Value="Violet"/>
+        </Style>
+        <Style Selector="RadioButton:checked">
+            <Setter Property="Background" Value="BlueViolet"/>
+            <Setter Property="Foreground" Value="HotPink"/>
+            
+        </Style>
+    </Window.Styles>
 
     <Design.DataContext>
         <!-- This only sets the DataContext for the previewer in an IDE,
@@ -16,98 +29,125 @@
         <vm:MainWindowViewModel/>
     </Design.DataContext>
     <StackPanel>
-        <Border BorderBrush="Brown" BorderThickness="0,0,0,10" 
-                Margin="150,15" Padding="0,5,0,5">
-            <TextBlock TextAlignment="Center"
-                       FontSize="50"
-                       Foreground="white">
-                Music Library
-            </TextBlock>
-        </Border>
-        <Grid
-            HorizontalAlignment="Right"
-            ColumnDefinitions="Auto,Auto"
-            RowDefinitions="Auto,Auto">
-            <Button Content="Edit"
-                    Name="EditButton"
-                    Click="editSongButton_OnClick"
-                Grid.Row="0" Grid.Column="0" Margin="15" 
-                    Background="Brown" Foreground="White">
-                <Button.Styles>
-                    <Style Selector="Button:pointerover /template/ ContentPresenter">
-                        <Setter Property="Background" Value="#631919"></Setter>
-                    </Style>
-                </Button.Styles>
-            </Button>
-            <Button Content="New"
-                    Name="NewButton"
-                    Click="AddSongButton_OnClick"
-                Grid.Row="0" Grid.Column="1" Margin="0,0,150,0" 
-                    Background="Brown" Foreground="White">
-                <Button.Styles>
-                    <Style Selector="Button:pointerover /template/ ContentPresenter">
-                        <Setter Property="Background" Value="#631919"></Setter>
-                    </Style>
-                </Button.Styles>
-            </Button>
-            <Button Content="Save"
-                    Name="SaveButton"
-                    IsVisible="False"
-                    Click="saveButton_OnClick"
-                    Grid.Row="0" Grid.Column="1" Margin="0,0,150,0" 
-                    Background="Brown" Foreground="White">
-                <Button.Styles>
-                    <Style Selector="Button:pointerover /template/ ContentPresenter">
-                        <Setter Property="Background" Value="#631919"></Setter>
-                    </Style>
-                </Button.Styles>
-            </Button>
-            <Button Content="Delete"
-                    Name="DeleteButton"
-                    IsVisible="False"
-                    Click="deleteButton_OnClick"
+        <StackPanel Name="Header"
+                    Height="200">
+            <Border BorderBrush="Brown" 
+                    BorderThickness="0,0,0,10" 
+                    Margin="150,15" 
+                    Padding="0,5,0,5">
+                <TextBlock TextAlignment="Center"
+                           FontSize="50"
+                           Foreground="white">
+                    Music Library
+                </TextBlock>
+            </Border>
+            <Grid
+                HorizontalAlignment="Right"
+                ColumnDefinitions="Auto,Auto"
+                RowDefinitions="Auto">
+                <Button Content="Edit"
+                        Name="EditButton"
+                        Click="editSongButton_OnClick"
                     Grid.Row="0" Grid.Column="0" Margin="15" 
-                    Background="Brown" Foreground="White">
-                <Button.Styles>
-                    <Style Selector="Button:pointerover /template/ ContentPresenter">
-                        <Setter Property="Background" Value="#631919"></Setter>
-                    </Style>
-                </Button.Styles>
-            </Button>
-        </Grid>
-        <Grid ShowGridLines="True"
-              Margin="100,5"
-              ColumnDefinitions="Auto, Auto, Auto"
-              RowDefinitions="Auto, Auto"
-              Name="LibraryGrid">
-            <!-- <Canvas Grid.Row="0" Grid.Column="0" -->
-            <!--         Margin="5"  -->
-            <!--         Background="black" -->
-            <!--         Height="150" -->
-            <!--         Width="150"> -->
-            <!--     <RadioButton GroupName="RadSongs" Background="Red"></RadioButton> -->
-            <!--     <Image Height="75" Width="75"  -->
-            <!--            Source="../Assets/37cents.png" -->
-            <!--            Canvas.Bottom="50"/> -->
-            <!--     <TextBox Canvas.Bottom="20" -->
-            <!--              Canvas.Right="35"> -->
-            <!--         testWrite -->
-            <!--     </TextBox> -->
-            <!--     <Button Canvas.Bottom="20" -->
-            <!--             IsVisible="False" -->
-            <!--             Name="ButtonTest" -->
-            <!--             Canvas.Right="2" -->
-            <!--             Width="30" -->
-            <!--         Background="White" -->
-            <!--             IsDefault="True" -->
-            <!--             Click="genreButton_OnClick"> -->
-            <!--         testButton -->
-            <!--     </Button> -->
-            <!--     <TextBlock Canvas.Bottom="5" Canvas.Right="55" -->
-            <!--                Foreground="White"> -->
-            <!--         Test -->
-            <!--     </TextBlock> -->
-            <!-- </Canvas> -->
+                        Background="Brown" Foreground="White">
+                    <Button.Styles>
+                        <Style Selector="Button:pointerover /template/ ContentPresenter">
+                            <Setter Property="Background" Value="#631919"></Setter>
+                        </Style>
+                    </Button.Styles>
+                </Button>
+                <Button Content="New"
+                        Name="NewButton"
+                        Click="AddSongButton_OnClick"
+                    Grid.Row="0" Grid.Column="1" Margin="0,0,150,0" 
+                        Background="Brown" Foreground="White">
+                    <Button.Styles>
+                        <Style Selector="Button:pointerover /template/ ContentPresenter">
+                            <Setter Property="Background" Value="#631919"></Setter>
+                        </Style>
+                    </Button.Styles>
+                </Button>
+                <Button Content="Save"
+                        Name="SaveButton"
+                        IsVisible="False"
+                        Click="saveButton_OnClick"
+                        Grid.Row="0" Grid.Column="1" Margin="0,0,150,0" 
+                        Background="Brown" Foreground="White">
+                    <Button.Styles>
+                        <Style Selector="Button:pointerover /template/ ContentPresenter">
+                            <Setter Property="Background" Value="#631919"></Setter>
+                        </Style>
+                    </Button.Styles>
+                </Button>
+                <Button Content="Delete"
+                        Name="DeleteButton"
+                        IsVisible="False"
+                        Click="deleteButton_OnClick"
+                        Grid.Row="0" Grid.Column="0" Margin="15" 
+                        Background="Brown" Foreground="White">
+                    <Button.Styles>
+                        <Style Selector="Button:pointerover /template/ ContentPresenter">
+                            <Setter Property="Background" Value="#631919"></Setter>
+                        </Style>
+                    </Button.Styles>
+                </Button>
+            </Grid>
+        </StackPanel>
+        <Grid HorizontalAlignment="Center">
+            <ScrollViewer HorizontalScrollBarVisibility="Disabled"
+                          VerticalScrollBarVisibility="Auto"
+                          Name="ScrollViewerLibrary">
+                <WrapPanel 
+                      ItemHeight="225"
+                      ItemWidth="225"
+                      Margin="100,5"
+                      Name="LibraryGrid">
+                    <Canvas Background="CornflowerBlue"
+                            Height="225"
+                            Width="225">
+                        <RadioButton GroupName="RadSongs">
+                            
+                        </RadioButton>
+                        <Image Height="125" Width="125"
+                               Source="../Assets/testBilde.png"
+                               Canvas.Bottom="100"
+                               Canvas.Left="50"/>
+                        <Viewbox Stretch="Uniform" 
+                                 StretchDirection="DownOnly"
+                                 Width="175"
+                                 Canvas.Bottom="80" 
+                                 Canvas.Left="30">
+                            <TextBlock Foreground="White">
+                                In The Aeroplane Over The Sea
+                            </TextBlock>
+                        </Viewbox>
+                        <Viewbox Stretch="Uniform" 
+                                 StretchDirection="DownOnly"
+                                 Width="175"
+                                 Canvas.Bottom="65" 
+                                 Canvas.Left="30">
+                            <TextBlock Foreground="White">
+                                Neutral Milk Hotel
+                            </TextBlock>
+                        </Viewbox>
+                        <StackPanel Canvas.Bottom="5"
+                                    Canvas.Left="55"
+                                    Orientation="Horizontal">
+                            <TextBox Margin="5">
+                                testWrite
+                            </TextBox>
+                            <Button IsVisible="True"
+                                    Name="ButtonTest"
+                                    Width="30"
+                                    Background="White"
+                                    IsDefault="True"
+                                    Click="genreButton_OnClick">
+                                t
+                            </Button>
+                        </StackPanel>
+                    </Canvas>
+                </WrapPanel>
+            </ScrollViewer>
         </Grid>
     </StackPanel>
 </Window>
