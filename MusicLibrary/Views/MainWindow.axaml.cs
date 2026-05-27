@@ -17,6 +17,9 @@ public partial class MainWindow : Window
 {
     private readonly List<Button> _genreButtons = new();
     private readonly List<TextBox> _genreTextBox = new();
+
+    private readonly List<Viewbox> _artistView = new();
+    private readonly List<Viewbox> _titleView = new();
     public MainWindow()
     {
         InitializeComponent();
@@ -41,23 +44,13 @@ public partial class MainWindow : Window
         var canvas = new Canvas
         {
             Height = 225,
-            Width = 225,
-            Background = Brushes.Green,
+            Width = 225
         };
-        var radiobutton = new RadioButton
-        {
-            GroupName = "RadSongs",
-            Background = Brushes.Red
-            
-        };
-        var textblock = new TextBlock
-        {
-            Text = "test" + Random.Shared.Next(3,1000)
-        };
+        var radiobutton = new RadioButton { GroupName = "RadSongs" };
         var image = new Image
         {
-            Height = 100,
-            Width = 100
+            Height = 125,
+            Width = 125
         };
         var bitmap = new Bitmap(AssetLoader.Open(new Uri("avares://MusicLibrary/Assets/testBilde.png")));
         image.Source = bitmap;
@@ -80,11 +73,44 @@ public partial class MainWindow : Window
             Margin = new Thickness(5),
             PlaceholderText = "test"
         };
+        var artistView = new Viewbox
+        {
+            Stretch = Stretch.Uniform,
+            StretchDirection = StretchDirection.DownOnly,
+            Width = 175
+        };
+        var titleView = new Viewbox
+        {
+            Stretch = Stretch.Uniform,
+            StretchDirection = StretchDirection.DownOnly,
+            Width = 175
+        };
         
+        var titleTextBox = new TextBox
+        {
+            Foreground =  Brushes.White,
+            PlaceholderText = "Album Title"
+        };
+        
+        var artistTextBox = new TextBox
+        {
+            Foreground =  Brushes.White,
+            PlaceholderText = "Album Artist",
+        };
+        artistTextBox.Classes.Add("nameInput");
+        titleTextBox.Classes.Add("nameInput");
+        
+        Canvas.SetLeft(titleView, 30);
+        Canvas.SetBottom(titleView, 80);
+        Canvas.SetLeft(artistView, 30);
+        Canvas.SetBottom(artistView, 60);
         Canvas.SetLeft(stackPanel, 55);
         Canvas.SetBottom(stackPanel, 5);
-        Canvas.SetLeft(genreButton, 50);
-        Canvas.SetBottom(image, 50);
+        Canvas.SetLeft(image, 50);
+        Canvas.SetBottom(image, 100);
+        
+        artistView.Child = artistTextBox;
+        titleView.Child = titleTextBox;
         
         stackPanel.Children.Add(genreTextBox);
         stackPanel.Children.Add(genreButton);
@@ -92,10 +118,13 @@ public partial class MainWindow : Window
         LibraryGrid.Children.Add(canvas);
         canvas.Children.Add(stackPanel);
         canvas.Children.Add(radiobutton);
-        canvas.Children.Add(textblock);
         canvas.Children.Add(image);
+        canvas.Children.Add(titleView);
+        canvas.Children.Add(artistView);
         _genreButtons.Add(genreButton);
         _genreTextBox.Add(genreTextBox);
+        _artistView.Add(artistView);
+        _titleView.Add(titleView);
     }
     
     private void editSongButton_OnClick(object? sender, RoutedEventArgs e)
@@ -111,14 +140,14 @@ public partial class MainWindow : Window
         
         foreach (var button  in _genreButtons)
         {
-            if (checkedButton != null && checkedButton.Parent is Canvas canvas && button.Parent?.Parent == canvas)
+            if (checkedButton?.Parent is Canvas canvas && button.Parent?.Parent == canvas)
             {
                 button.IsVisible = true;
             }
         }
         foreach (var textBox  in _genreTextBox)
         {
-            if (checkedButton != null && checkedButton.Parent is Canvas canvas && textBox.Parent?.Parent == canvas)
+            if (checkedButton?.Parent is Canvas canvas && textBox.Parent?.Parent == canvas)
             {
                 textBox.IsVisible = true;
             }
@@ -140,6 +169,32 @@ public partial class MainWindow : Window
         {
             textBox.IsVisible = false;
         }
+        
+        // change textBox to textBlock
+        var titleTextBlock = new TextBlock
+        {
+            Foreground = Brushes.White
+        };
+        var artistTextBlock = new TextBlock
+        {
+            Foreground = Brushes.White
+        };
+        foreach (var artViewBox in _artistView)
+        {
+            if (artViewBox.Child is TextBox textBox)
+            {
+                artistTextBlock.Text = textBox.Text;
+                artViewBox.Child = artistTextBlock;
+            }
+        }
+        foreach (var titViewBox in _titleView)
+        {
+            if (titViewBox.Child is TextBox textBox)
+            {
+                titleTextBlock.Text = textBox.Text;
+                titViewBox.Child = titleTextBlock;
+            }
+        }
     }
 
     private void deleteButton_OnClick(object? sender, RoutedEventArgs e)
@@ -153,7 +208,7 @@ public partial class MainWindow : Window
             .OfType<RadioButton>()
             .FirstOrDefault(r => r.IsChecked == true);
 
-        if (checkedButton != null && checkedButton.Parent is Canvas canvas)
+        if (checkedButton?.Parent is Canvas canvas)
         {
             LibraryGrid.Children.Remove(canvas);
         }

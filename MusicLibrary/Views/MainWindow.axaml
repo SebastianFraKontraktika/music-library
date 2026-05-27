@@ -19,7 +19,15 @@
         <Style Selector="RadioButton:checked">
             <Setter Property="Background" Value="BlueViolet"/>
             <Setter Property="Foreground" Value="HotPink"/>
-            
+        </Style>
+        <Style Selector="TextBox.nameInput">
+            <Setter Property="MinHeight" Value="0"></Setter>
+            <Setter Property="MinWidth" Value="0"></Setter>
+            <Setter Property="Height" Value="20"></Setter>
+            <Setter Property="Width" Value="100"></Setter>
+            <Setter Property="FontSize" Value="10"></Setter>
+            <Setter Property="Padding" Value="5,2"></Setter>
+            <Setter Property="Margin" Value="0"></Setter>
         </Style>
     </Window.Styles>
 
@@ -102,50 +110,6 @@
                       ItemWidth="225"
                       Margin="100,5"
                       Name="LibraryGrid">
-                    <Canvas Background="CornflowerBlue"
-                            Height="225"
-                            Width="225">
-                        <RadioButton GroupName="RadSongs">
-                            
-                        </RadioButton>
-                        <Image Height="125" Width="125"
-                               Source="../Assets/testBilde.png"
-                               Canvas.Bottom="100"
-                               Canvas.Left="50"/>
-                        <Viewbox Stretch="Uniform" 
-                                 StretchDirection="DownOnly"
-                                 Width="175"
-                                 Canvas.Bottom="80" 
-                                 Canvas.Left="30">
-                            <TextBlock Foreground="White">
-                                In The Aeroplane Over The Sea
-                            </TextBlock>
-                        </Viewbox>
-                        <Viewbox Stretch="Uniform" 
-                                 StretchDirection="DownOnly"
-                                 Width="175"
-                                 Canvas.Bottom="65" 
-                                 Canvas.Left="30">
-                            <TextBlock Foreground="White">
-                                Neutral Milk Hotel
-                            </TextBlock>
-                        </Viewbox>
-                        <StackPanel Canvas.Bottom="5"
-                                    Canvas.Left="55"
-                                    Orientation="Horizontal">
-                            <TextBox Margin="5">
-                                testWrite
-                            </TextBox>
-                            <Button IsVisible="True"
-                                    Name="ButtonTest"
-                                    Width="30"
-                                    Background="White"
-                                    IsDefault="True"
-                                    Click="genreButton_OnClick">
-                                t
-                            </Button>
-                        </StackPanel>
-                    </Canvas>
                 </WrapPanel>
             </ScrollViewer>
         </Grid>
