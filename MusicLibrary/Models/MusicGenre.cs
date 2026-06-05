@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using System.Data;
 
 namespace MusicLibrary.Models;
-public class MusicGenre : DbContext
+public class MusicGenre
 {
     public long MusicId { get; set; }
     public Music Music { get; set; }

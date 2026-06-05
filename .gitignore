@@ -254,3 +254,8 @@ paket-files/
 
 # Mac
 .DS_Store
+
+# database
+*.db
+*.db-shm
+*.db-wal

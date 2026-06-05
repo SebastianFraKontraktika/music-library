@@ -1,3 +1,4 @@
+using System;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Collections.Generic;
@@ -17,6 +18,5 @@ public class Music
     [Required]
     [StringLength(250)]
     public required string ArtistName { get; set; }
-    
     public ICollection<MusicGenre> MusicGenres { get; set; } = new List<MusicGenre>();
 }
