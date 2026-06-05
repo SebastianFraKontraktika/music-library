@@ -20,7 +20,9 @@ coming soon
 
 ### Prerequisites
 
-- [.NET 8 SDK](https://dotnet.microsoft.com/download) or later
+- [.NET 9 SDK](https://dotnet.microsoft.com/download) or later
+- [microsoft.entityframeworkcore.sqlite](https://www.nuget.org/packages/microsoft.entityframeworkcore.sqlite) version dependant of .NET version
+- [Microsoft.EntityFrameworkCore.Tools](https://www.nuget.org/packages/Microsoft.EntityFrameworkCore.Tools) version dependant of .NET version
 
 ### Fork and Run
 
