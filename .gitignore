@@ -259,3 +259,7 @@ paket-files/
 *.db
 *.db-shm
 *.db-wal
+
+# NET
+[Bb]in/
+[Oo]bj/
