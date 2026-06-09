@@ -10,6 +10,9 @@ using Avalonia.Media;
 using Avalonia.Media.Imaging;
 using Avalonia.Platform;
 using Avalonia.VisualTree;
+using Microsoft.EntityFrameworkCore;
+using MusicLibrary.Data;
+using MusicLibrary.Models;
 
 namespace MusicLibrary.Views;
 
@@ -179,20 +182,22 @@ public partial class MainWindow : Window
         {
             Foreground = Brushes.White
         };
-        foreach (var artViewBox in _artistView)
+        using (var context = new ApplicationDbContext())
         {
-            if (artViewBox.Child is TextBox textBox)
+            foreach (var (artViewBox, titViewBox) in _artistView.Zip(_titleView))
             {
-                artistTextBlock.Text = textBox.Text;
-                artViewBox.Child = artistTextBlock;
-            }
-        }
-        foreach (var titViewBox in _titleView)
-        {
-            if (titViewBox.Child is TextBox textBox)
-            {
-                titleTextBlock.Text = textBox.Text;
-                titViewBox.Child = titleTextBlock;
+                if (artViewBox.Child is TextBox { Text: not null } artTextBox &&
+                    titViewBox.Child is TextBox { Text: not null } titTextBox)
+                {
+                    var newMusic = new Music
+                    {
+                        AlbumName = titTextBox.Text,
+                        ArtistName = artTextBox.Text,
+                        Path = "hello/pick!"
+                    };
+                    context.Musics.Add(newMusic);
+                    context.SaveChanges();
+                }
             }
         }
     }

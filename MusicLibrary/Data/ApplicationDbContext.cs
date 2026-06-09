@@ -16,6 +16,8 @@ public class ApplicationDbContext : DbContext
     
     protected override void OnModelCreating(ModelBuilder modelBuilder) 
     {
+        base.OnModelCreating(modelBuilder);
+        
         modelBuilder.Entity<MusicGenre>()
             .HasKey(mg => new { mg.MusicId, mg.GenreId });
     }

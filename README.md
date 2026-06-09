@@ -49,6 +49,7 @@ coming soon
 ## Tech Stack
 
 - [Avalonia UI](https://avaloniaui.net/) — Cross-platform .NET UI framework
+- [SQLite](https://sqlite.org/) - SQL database engine
 - C# / .NET
 
 ## Contributing
