@@ -3,14 +3,15 @@ using Avalonia.Controls;
 using Avalonia.Interactivity;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.IO;
 using System.Linq;
 using Avalonia;
 using Avalonia.Layout;
 using Avalonia.Media;
 using Avalonia.Media.Imaging;
 using Avalonia.Platform;
+using Avalonia.Platform.Storage;
 using Avalonia.VisualTree;
-using Microsoft.EntityFrameworkCore;
 using MusicLibrary.Data;
 using MusicLibrary.Models;
 
@@ -18,6 +19,8 @@ namespace MusicLibrary.Views;
 
 public partial class MainWindow : Window
 {
+    private string _imagePath = string.Empty;
+    
     private readonly List<Button> _genreButtons = new();
     private readonly List<TextBox> _genreTextBox = new();
 
@@ -36,8 +39,41 @@ public partial class MainWindow : Window
         if (newHeight > 0)
             ScrollViewerLibrary.Height = newHeight;
     }
+
+    private async void filePickerButton_OnClick(object? sender, RoutedEventArgs e)
+    {
+        var topLevel = TopLevel.GetTopLevel(sender as Button);
+        if (topLevel == null) return;
+
+        var files = await topLevel.StorageProvider.OpenFilePickerAsync(
+            new FilePickerOpenOptions
+            {
+                Title = "Select Album Cover",
+                AllowMultiple = false,
+                FileTypeFilter = new[]
+                {
+                    new FilePickerFileType("Images")
+                    {
+                        Patterns = new[] { "*.png", "*.jpg", "*.jpeg", "*.bmp" }
+                    }
+                }
+            });
+
+        if (files.Count > 0)
+        {
+            var imageFolder = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Images");
+            Directory.CreateDirectory(imageFolder);
+            
+            var filename = $"{DateTime.Now.Ticks}_{Path.GetFileName(files[0].Path.LocalPath)}";
+            var destinationPath = Path.Combine(imageFolder, filename);
+            
+            File.Copy(files[0].Path.LocalPath, destinationPath, overwrite: true);
+            
+            _imagePath = destinationPath;
+        }
+    }
     
-    private void AddSongButton_OnClick(object? sender, RoutedEventArgs e)
+    private async void AddSongButton_OnClick(object? sender, RoutedEventArgs e)
     {
         SaveButton.IsVisible = true;
         DeleteButton.IsVisible = true;
@@ -55,8 +91,16 @@ public partial class MainWindow : Window
             Height = 125,
             Width = 125
         };
-        var bitmap = new Bitmap(AssetLoader.Open(new Uri("avares://MusicLibrary/Assets/testBilde.png")));
-        image.Source = bitmap;
+        var fileOpener = new Button
+        {
+            Content =  "Open File",
+            Foreground =   Brushes.Black,
+            Background =  Brushes.White,
+        };
+        fileOpener.Click += filePickerButton_OnClick; 
+        
+        // var bitmap = new Bitmap(AssetLoader.Open(new Uri("avares://MusicLibrary/Assets/testBilde.png")));
+        // image.Source = bitmap;
         var genreButton = new Button
         {
             Content = "Genre",
@@ -111,6 +155,8 @@ public partial class MainWindow : Window
         Canvas.SetBottom(stackPanel, 5);
         Canvas.SetLeft(image, 50);
         Canvas.SetBottom(image, 100);
+        Canvas.SetLeft(fileOpener, 50);
+        Canvas.SetBottom(fileOpener, 100);
         
         artistView.Child = artistTextBox;
         titleView.Child = titleTextBox;
@@ -124,6 +170,7 @@ public partial class MainWindow : Window
         canvas.Children.Add(image);
         canvas.Children.Add(titleView);
         canvas.Children.Add(artistView);
+        canvas.Children.Add(fileOpener);
         _genreButtons.Add(genreButton);
         _genreTextBox.Add(genreTextBox);
         _artistView.Add(artistView);
@@ -193,7 +240,7 @@ public partial class MainWindow : Window
                     {
                         AlbumName = titTextBox.Text,
                         ArtistName = artTextBox.Text,
-                        Path = "hello/pick!"
+                        Path = _imagePath
                     };
                     context.Musics.Add(newMusic);
                     context.SaveChanges();
